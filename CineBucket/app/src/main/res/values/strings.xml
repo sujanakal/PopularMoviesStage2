@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">PopularMoviez</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_detailed_">Detailed_Activity</string>
+
+    <string name="pref_title">Sort By</string>
+    <string name="pref_dialog_title">Sort By</string>
+    <string-array name="pref_entries">
+        <item>Popularity</item>
+        <item>Ratings</item>
+    </string-array>
+
+    <string-array name="pref_entry_values">
+        <item>Popularity</item>
+        <item>Ratings</item>
+    </string-array>
+
+    <string name="pref_default_value">Popularity</string>
+
+    <string name="pref_key">PREF_FILE</string>
+
+    <string name="pref_summary">Select most popular movies or most rated movies</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="myPreferenceActivity">Sort by</string>
+
+
+
+    <string name="detail_movie_title">Movie title</string>
+    <string name="detail_release_date">Release date</string>
+    <string name="detail_vote_average">Vote average</string>
+    <string name="detail_vote_count">Vote count</string>
+    <string name="detail_popularity">Popularity :</string>
+    <string name="detail_pop_value">pop</string>
+
+    <string name="review_heading">Reviews</string>
+    <string name="review_author">Author</string>
+    <string name="review_content">Interstellar offers surprisingly cold (and often stiff) drama – albeit drama that is buoyed by high-minded science fiction scenarios and arresting visuals. Nolan relies heavily on lengthy scenes of surface-level exposition, where characters debate or outright explain complicated physics and philosophical ideas, to educate the audience and ruminate on humanity (both good and bad) in the face of death and destruction.</string>
+</resources>

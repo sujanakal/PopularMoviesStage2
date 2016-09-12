@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Material">
+        <!-- Customize your theme here. -->
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+
+    </style>
+    
+    <style name="Grid">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:numColumns">auto_fit</item>
+        <item name="android:gravity">center</item>
+        <item name="android:columnWidth">@dimen/columnWidth</item>
+
+    </style>
+
+    <style name="posterImage">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:adjustViewBounds">true</item>
+
+    </style>
+
+    <style name="LargeText">
+        <item name="android:textSize">@dimen/LargeText</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+</resources>
