@@ -28,11 +28,21 @@ public class MovieDetailActivity extends AppCompatActivity {
         bundle.putParcelable("Movie", getMovies);
 
         MovieDetailFragment mFragment = new MovieDetailFragment();
-        addFragments(mFragment,bundle);
+        mFragment.setArguments(bundle);
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.movieDetails,mFragment)
+                .commit();
+        //addFragments(mFragment,bundle);
 
         ReviewFragment rFragment = new ReviewFragment();
         bundle.putInt("MovieId",getMovies.getId());
-        addFragments(rFragment,bundle);
+        rFragment.setArguments(bundle);
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.movieReviews,rFragment)
+                .commit();
+        //addFragments(rFragment,bundle);
     }
 
     public void addFragments(Fragment fragment, Bundle bundle){
