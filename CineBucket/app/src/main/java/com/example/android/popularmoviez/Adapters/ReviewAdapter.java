@@ -50,6 +50,7 @@ public class ReviewAdapter extends ArrayAdapter<Reviews> {
             viewHolder = new myReviewHolder();
             viewHolder.author = (TextView) convertView.findViewById(R.id.review_author);
             viewHolder.content = (TextView) convertView.findViewById(R.id.review_content);
+
             convertView.setTag(viewHolder);
         }
         else
@@ -59,7 +60,6 @@ public class ReviewAdapter extends ArrayAdapter<Reviews> {
 
 
         viewHolder.author.setText(reviews.getAuthor());
-       // viewHolder.author.setText("can you see me?");
         viewHolder.content.setText(reviews.getContent());
 
         return convertView;

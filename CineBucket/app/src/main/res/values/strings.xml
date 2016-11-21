@@ -40,4 +40,7 @@
     <string name="review_heading">Reviews</string>
     <string name="review_author">Author</string>
     <string name="review_content">Interstellar offers surprisingly cold (and often stiff) drama – albeit drama that is buoyed by high-minded science fiction scenarios and arresting visuals. Nolan relies heavily on lengthy scenes of surface-level exposition, where characters debate or outright explain complicated physics and philosophical ideas, to educate the audience and ruminate on humanity (both good and bad) in the face of death and destruction.</string>
+
+    <string name="trailerHeadingText">Trailers</string>
+
 </resources>

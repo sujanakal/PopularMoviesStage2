@@ -3,18 +3,19 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/review_author"
-        android:text="@string/review_author"
-        android:textSize="@dimen/review_author" />
+            android:layout_width="match_parent"
+            android:id="@+id/review_author"
+            android:textSize="@dimen/reviewTextSize"
+            android:text="@string/review_author" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/reviewTextSize"
         android:id="@+id/review_content"
-        android:text="@string/review_content"
-        android:textSize="@dimen/review_content"/>
+        android:text="@string/review_content" />
 
 
 </LinearLayout>

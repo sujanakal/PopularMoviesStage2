@@ -24,10 +24,14 @@
     <dimen name="collapsing_poster_height">310dp</dimen>
     <dimen name="LargeText">40sp</dimen>
 
-    <dimen name="review_heading">24sp</dimen>
-    <dimen name="review_author">20sp</dimen>
-    <dimen name="review_content">20sp</dimen>
+    <dimen name="reviewHeadingTextSize">24sp</dimen>
+    <dimen name="reviewPadding">20dp</dimen>
+    <dimen name="reviewTextSize">16sp</dimen>
 
-    <dimen name="trailer_padding">20dp</dimen>
+    <dimen name="trailerPadding">20dp</dimen>
+    <dimen name="trailerHeadingTextSize">24sp</dimen>
+    <dimen name="trailerNameTextSize">20sp</dimen>
 
+    <dimen name="floatingActionBarWidth">16dp</dimen>
+    <dimen name="floatingActionBarHeight">16dp</dimen>
 </resources>

@@ -2,9 +2,14 @@ package com.example.android.popularmoviez.Fragment;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.*;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,23 +21,67 @@ import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
 import com.squareup.picasso.Picasso;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class MovieDetailFragment extends Fragment {
-
-
+    SharedPreferences favoriteSharedPreferences ;
+    Editor favEditor;
+    boolean favoriteButtonState;
     String TAG = MovieDetailFragment.class.getSimpleName();
+    static String FAV_STATE = "favState";
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        outState.putBoolean(FAV_STATE,favoriteButtonState);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        if(savedInstanceState!= null){
+            favoriteButtonState = savedInstanceState.getBoolean(FAV_STATE);
+            saveInSharedPreference(favoriteButtonState);
+        }
+        super.onActivityCreated(savedInstanceState);
+    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.collapsible_detail_fragment, container, false);
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
         movieDetails();
+        favoriteSharedPreferences = getContext().getSharedPreferences("FavoritePref", MODE_PRIVATE);
+        favEditor = favoriteSharedPreferences.edit();
+        final FloatingActionButton floatingActionButton = (FloatingActionButton) getView().findViewById(R.id.favoriteButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!favoriteButtonState){
+                    floatingActionButton.setImageResource(R.drawable.ic_heart);
+                    favoriteButtonState = true;
+                    saveInSharedPreference(favoriteButtonState);
+                }
+                else{
+                    floatingActionButton.setImageResource(R.drawable.ic_heart_outline);
+                    favoriteButtonState = false;
+                    saveInSharedPreference(favoriteButtonState);
+                }
+            }
+        });
+    }
+
+    public void saveInSharedPreference(boolean val){
+        favEditor.putBoolean("favorite",val);
+        favEditor.commit();
     }
 
     private void movieDetails() {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/movie_detail"/>
+    <!--<include layout="@layout/movie_detail"/>-->
 
     <android.support.design.widget.AppBarLayout
         app:theme="@style/android:Theme.Material"
@@ -116,7 +116,28 @@
                 android:text="In 2016, one of the most successful animated franchises in the world returns with its biggest comedy adventure yet, KUNG FU PANDA 3. When Po's long-lost panda father suddenly reappears, the reunited duo travels to a secret panda paradise to meet scores of hilarious new panda characters. But when the supernatural villain Kai begins to sweep across China defeating all the kung fu masters, Po must do the impossible-learn to train a village full of his fun-loving, clumsy brethren to become the ultimate band of Kung Fu Pandas."
                 android:textSize="@dimen/detail_overview_size"/>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/movieTrailers"/>
+
+            <FrameLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/movieReviews" />
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/favoriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        app:fabSize="normal"
+        android:src="@drawable/ic_heart_outline"
+        app:layout_anchor="@+id/app_bar_layout"
+        app:layout_anchorGravity="bottom|right|end"
+        app:backgroundTint="@color/statusBar" />
 </android.support.design.widget.CoordinatorLayout>

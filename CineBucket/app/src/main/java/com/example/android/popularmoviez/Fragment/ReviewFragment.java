@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.android.popularmoviez.Adapters.ReviewAdapter;
 import com.example.android.popularmoviez.ApiKey;
@@ -49,13 +51,19 @@ public class ReviewFragment extends Fragment {
         super.onStart();
         DetailTask task = new DetailTask();
         task.execute();
-        movieReviews();
     }
-    public void movieReviews()
+   /* public void movieReviews(Reviews reviews)
     {
+        LinearLayout revFragmentLayout = (LinearLayout) getView().findViewById(R.id.Review_fragment_linear_layout);
+        TextView authorName = new TextView(getContext());
+        TextView content = new TextView(getContext());
+        authorName.setText(reviews.getAuthor());
+        content.setText(reviews.getContent());
 
-
-    }
+        revFragmentLayout.addView(authorName);
+        revFragmentLayout.addView(content);
+        revFragmentLayout.setDividerPadding(10);
+    }*/
     class DetailTask extends AsyncTask<String, Void, Void>
     {
 
@@ -63,8 +71,6 @@ public class ReviewFragment extends Fragment {
         @Override
         protected Void doInBackground(String... params) {
             String url_reviews = "https://api.themoviedb.org/3/movie/"+MovieId+"/reviews?api_key=";
-           // String url_trailers = "https://api.themoviedb.org/3/movie/"+MovieId+"/videos?api_key=";
-           // getTrailers(url_trailers,movieTrailers);
             getReviews(url_reviews,movieReviews);
             return null;
         }
@@ -73,7 +79,6 @@ public class ReviewFragment extends Fragment {
         protected void onPostExecute(Void v)
         {
             loadReviewAdapter(movieReviews);
-            //loadTrailersAdapter(movieTrailers);
         }
     }
 
@@ -157,6 +162,11 @@ public class ReviewFragment extends Fragment {
 
         ReviewAdapter reviewAdapter = new ReviewAdapter(getActivity(),mRev);
         reviewList.setAdapter(reviewAdapter);
+
+        /*for(int i=0; i<mRev.size();i++){
+            Reviews reviews = mRev.get(i);
+            movieReviews(reviews);
+        }*/
     }
 
 
