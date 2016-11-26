@@ -12,11 +12,11 @@
         android:textColor="@color/trailersHeadingColor"
         android:text="@string/trailerHeadingText"/>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/trailersListView"
+        android:id="@+id/trailersRecyclerView"
         android:padding="@dimen/trailerPadding">
-    </ListView>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

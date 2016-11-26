@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.android.popularmoviez.Fragment.MovieDetailFragment;
@@ -25,6 +26,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         getWindow().setStatusBarColor(getResources().getColor(R.color.statusBar));
         setContentView(R.layout.movie_detail);
         Intent getin = getIntent();

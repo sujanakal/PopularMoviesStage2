@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.popularmoviez.Activity.MainActivity;
+import com.example.android.popularmoviez.Activity.MovieDetailActivity;
 import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
 import com.squareup.picasso.Picasso;
@@ -57,6 +60,8 @@ public class MovieDetailFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+
         movieDetails();
         favoriteSharedPreferences = getContext().getSharedPreferences("FavoritePref", MODE_PRIVATE);
         favEditor = favoriteSharedPreferences.edit();
@@ -85,14 +90,11 @@ public class MovieDetailFragment extends Fragment {
     }
 
     private void movieDetails() {
-        // trailerList = (ListView) getView().findViewById(R.id.trailer_list);
-        //Intent getIn = getIntent();
         Movie getMovie = getArguments().getParcelable("Movie");
 
         Log.d(TAG, "getMovie content: " + getMovie);
         CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) getView().findViewById(R.id.collapsing_toolbar_layout);
-
 
         if (getMovie != null) {
 
@@ -133,191 +135,6 @@ public class MovieDetailFragment extends Fragment {
                     .into(moviePoster);
 
         }
-
-       /* class DetailTask extends AsyncTask<String, Void, Void>
-        {
-
-            @Override
-            protected Void doInBackground(String... params) {
-                Movie mv = new Movie();
-
-                String url_trailers = "https://api.themoviedb.org/3/movie/"+movieId+"/videos?api_key=";
-                getTrailers(url_trailers,movieTrailers);
-                getReviews(url_reviews,movieReviews);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void v)
-            {
-
-                loadTrailersAdapter(movieTrailers);
-            }
-        }
-
-        DetailTask task = new DetailTask();
-        task.execute();
-    }*/
-
-
-
-
-
-
-
-   /* public void getTrailers(String trailers, ArrayList<Trailers> trailerList)
-    {
-        BufferedReader buf = null;
-        HttpsURLConnection http = null;
-
-        String input = null;
-
-        try {
-            URL url = new URL(trailers + apiKey);
-
-            http = (HttpsURLConnection) url.openConnection();
-            http.setRequestMethod("GET");
-            http.connect();
-
-            InputStream in = http.getInputStream();
-            if (in == null){
-                //No json response is got
-            }
-
-            buf = new BufferedReader(new InputStreamReader(in));
-
-            String jsonData;
-            StringBuilder sb = new StringBuilder();
-            if ((jsonData = buf.readLine()) != null) {
-                sb.append(jsonData + "\n");
-            }
-
-            if (sb.length() == 0) {
-//              Empty stream
-            }
-            input = sb.toString();
-            if (input != null) {
-                final  String RESULTS_JSON = "results";
-                final  String ISO_3166_1 = "iso_3166_1";
-                final  String ISO_639_1 = "iso_639_1";
-                final  String KEY = "key";
-                final  String NAME = "name";
-                final  String SITE = "site";
-                final  String SIZE = "size";
-                final  String TYPE = "type";
-
-                JSONObject jsonObject = new JSONObject(input);
-                JSONArray results = jsonObject.getJSONArray(RESULTS_JSON);
-
-                for (int i = 0; i < results.length(); i++) {
-                    JSONObject iObject = results.getJSONObject(i);
-                    Trailers iTrailers = new Trailers();
-
-                    iTrailers.setIso_3166_1(iObject.getString(ISO_3166_1));
-                    iTrailers.setIso_639_1(iObject.getString(ISO_639_1));
-                    iTrailers.setKey(iObject.getString(KEY));
-                    iTrailers.setName(iObject.getString(NAME));
-                    iTrailers.setSite(iObject.getString(SITE));
-                    iTrailers.setSize(iObject.getInt(SIZE));
-                    iTrailers.setType(iObject.getString(TYPE));
-                    trailerList.add(iTrailers);
-                }
-            }
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } finally {
-
-            if (http != null)
-                http.disconnect();
-
-            if (buf != null) {
-                try {
-                    buf.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-
-
-
-    public class TrailerAdapter extends ArrayAdapter<Trailers>
-    {
-        Context context;
-        ArrayList<Trailers> trailersArrayList = new ArrayList<Trailers>();
-        Trailers trailers = new Trailers();
-
-        public TrailerAdapter(Context context,ArrayList<Trailers> trailersArrayList) {
-            super(context,R.layout.trailers);
-            this.context=context;
-            this.trailersArrayList=trailersArrayList;
-        }
-        @Override
-        public Trailers getItem(int position)
-        {
-            return trailersArrayList.get(position);
-        }
-
-
-        @Override
-//      Getting the size of the arrayList
-        public int getCount(){
-            return trailersArrayList.size();
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            myTrailerHolder viewHolder;
-
-            if (convertView == null){
-
-                convertView = LayoutInflater.from(context).inflate(R.layout.reviews,parent,false);
-
-                viewHolder = new myTrailerHolder();
-                viewHolder.text = (TextView) convertView.findViewById(R.id.trailer_text);
-                viewHolder.icon = (ImageView) convertView.findViewById(R.id.trailer_icon);
-                convertView.setTag(viewHolder);
-            }
-            else
-            {
-                viewHolder = (myTrailerHolder) convertView.getTag();
-            }
-
-            String type;
-            if((type=trailers.getType())=="Trailer")
-            viewHolder.text.setText(trailers.getName());
-           // viewHolder.content.setText(reviews.getContent());
-
-            return convertView;
-        }
-
-    }
-
-
-
-
-    public void loadTrailersAdapter(ArrayList<Trailers> mTrail)
-    {
-        TrailerAdapter trailerAdapter = new TrailerAdapter(getContext(),mTrail);
-       // trailerList.setAdapter(trailerAdapter);
-    }
-
-
-
-    public class myTrailerHolder{
-        TextView text;
-        ImageView icon;
-    }*/
-
 
     }
 }

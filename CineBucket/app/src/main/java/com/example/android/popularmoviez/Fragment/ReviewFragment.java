@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.android.popularmoviez.Adapters.ReviewAdapter;
-import com.example.android.popularmoviez.ApiKey;
+import com.example.android.popularmoviez.Util.ApiKey;
 import com.example.android.popularmoviez.Model.Reviews;
 import com.example.android.popularmoviez.R;
 

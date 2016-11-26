@@ -1,6 +1,7 @@
 package com.example.android.popularmoviez.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class TrailerAdapter extends ArrayAdapter<Trailers> {
     private Context context;
     private ArrayList<Trailers> mTrailers;
     int count=0;
+    String TAG = "TrailerAdapter";
 
     public TrailerAdapter(Context context,ArrayList<Trailers> mTrailers){
         super(context, R.layout.trailers);
@@ -44,7 +46,6 @@ public class TrailerAdapter extends ArrayAdapter<Trailers> {
         Trailers trailers = mTrailers.get(position);
         myTrailerHolder viewHolder;
         String TYPE = "Trailer";
-        String trailerText = "Trailer ";
 
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.trailers,parent,false);
@@ -59,10 +60,9 @@ public class TrailerAdapter extends ArrayAdapter<Trailers> {
             viewHolder = (myTrailerHolder) convertView.getTag();
         }
 
-        if(trailers.getType() == TYPE){
-            count++;
-            viewHolder.tText.setText(trailerText + count);
-        }
+        Log.d(TAG,"content: " + trailers.getName());
+
+        viewHolder.tText.setText(trailers.getName());
         viewHolder.tDisplayPicture.setImageResource(R.drawable.ic_heart);
         return convertView;
     }

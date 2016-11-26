@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true">
 
-    <!--<include layout="@layout/movie_detail"/>-->
-
     <android.support.design.widget.AppBarLayout
         app:theme="@style/android:Theme.Material"
         android:layout_width="match_parent"
@@ -34,6 +32,7 @@
 
             <android.support.v7.widget.Toolbar
                 android:layout_height="?attr/actionBarSize"
+                android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 app:theme="@style/android:Theme.Material"
                 app:layout_collapseMode="pin"/>
@@ -68,7 +67,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingLeft="@dimen/linear_layout_left_padding">
+                    android:paddingLeft="@dimen/linear_layout_left_padding"
+                    android:paddingTop="@dimen/linear_layout_left_padding">
 
                     <TextView
                         android:layout_width="match_parent"

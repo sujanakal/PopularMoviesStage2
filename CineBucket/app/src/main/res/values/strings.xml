@@ -11,11 +11,13 @@
     <string-array name="pref_entries">
         <item>Popularity</item>
         <item>Ratings</item>
+        <item>Favorite</item>
     </string-array>
 
     <string-array name="pref_entry_values">
         <item>Popularity</item>
         <item>Ratings</item>
+        <item>Favorite</item>
     </string-array>
 
     <string name="pref_default_value">Popularity</string>

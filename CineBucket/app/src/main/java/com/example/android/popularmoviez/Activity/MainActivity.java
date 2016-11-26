@@ -1,13 +1,18 @@
 package com.example.android.popularmoviez.Activity;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -19,8 +24,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.example.android.popularmoviez.ApiKey;
+import com.example.android.popularmoviez.Util.ApiKey;
 import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
 import com.squareup.picasso.Picasso;
@@ -48,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayList<Movie> mTopVotedList = new ArrayList<>();
     final static String POPULAR_LIST = "popularList";
     final static String TOP_VOTE_LIST = "topVoteList";
-
-
+    String progressDialogMessage = "Loading... Please wait...";
     ApiKey key = new ApiKey();
+    String noInternerConnection = "No Internet connection!";
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
@@ -104,13 +110,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Toolbar appbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(appbar);
-
         getWindow().setStatusBarColor(getResources().getColor(R.color.statusBar));
 
         MovieTask task = new MovieTask();
-        task.execute();
 
+        if(isOnline()){
+            task.execute();
+        }
 
+    }
+
+    public boolean isOnline(){
+        String alertTitle = "Network Error!";
+        String alertMessage = "Could not load the movies.\nPlease check your network settings and try again!";
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
+            //Toast.makeText(getApplicationContext(),noInternerConnection, Toast.LENGTH_LONG).show();
+            AlertDialog noInternetAlert = new AlertDialog.Builder(this).create();
+            noInternetAlert.setTitle(alertTitle);
+            noInternetAlert.setMessage(alertMessage);
+            noInternetAlert.show();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -167,9 +190,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     public class MovieTask extends AsyncTask<String, Void, Void> {
+        ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        @Override
+        protected void onPreExecute(){
+
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setMessage(progressDialogMessage);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+            super.onPreExecute();
+        }
 
         @Override
         protected Void doInBackground(String... params) {
+
 
 //          string variables to hold the api request urls for popular movies and top rated movies
 
@@ -187,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
         protected void onPostExecute(Void v) {
-
+                progressDialog.dismiss();
 //              Calling function to load from the sharedpreferences
                 loadMovies();
         }
@@ -215,9 +250,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //  Function to load the array adapter for given setting
     private void loadMovieImageAdapter(ArrayList<Movie> mArrayList) {
         MovieImageAdapter adapter = new MovieImageAdapter(getApplicationContext(),mArrayList);
-
 //      Setting the adapter to display the items on the gridview using the gridview object myGrid
         myGrid.setAdapter(adapter);
+
     }
 
 

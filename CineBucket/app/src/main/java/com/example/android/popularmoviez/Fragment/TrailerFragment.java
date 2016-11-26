@@ -3,15 +3,15 @@ package com.example.android.popularmoviez.Fragment;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
-import com.example.android.popularmoviez.Adapters.TrailerAdapter;
-import com.example.android.popularmoviez.ApiKey;
-import com.example.android.popularmoviez.Model.Reviews;
+import com.example.android.popularmoviez.Adapters.TrailerRecyclerAdapter;
+import com.example.android.popularmoviez.Util.ApiKey;
 import com.example.android.popularmoviez.Model.Trailers;
 import com.example.android.popularmoviez.R;
 
@@ -37,10 +37,12 @@ import javax.net.ssl.HttpsURLConnection;
 public class TrailerFragment extends Fragment {
     ArrayList<Trailers> movieTrailers = new ArrayList<>();
     ApiKey key = new ApiKey();
+    String TAG = "TrailerFragment";
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstantState){
-        return layoutInflater.inflate(R.layout.trailer_fragment,container,false);
+       // return layoutInflater.inflate(R.layout.trailer_fragment,container,false);
+        return layoutInflater.inflate(R.layout.trailers_recyclerview,container,false);
     }
     @Override
     public void onStart(){
@@ -120,7 +122,9 @@ public class TrailerFragment extends Fragment {
 
                     trailerList.add(iTrailers);
                 }
-                /*Log.d(TAG, "getReviews: "+results);*/
+                Log.d(TAG, "getTrailers: "+results);
+                for(int i=0;i<trailerList.size();i++)
+                    Log.d(TAG,"index " +i + ": " + trailerList.get(i).getName());
             }
         } catch (ProtocolException e) {
             e.printStackTrace();
@@ -147,9 +151,16 @@ public class TrailerFragment extends Fragment {
 
 
     public void loadTrailersAdapter(ArrayList<Trailers> movieTrailers){
-        ListView trailerListView = (ListView) getView().findViewById(R.id.trailersListView);
+        /*ListView trailerListView = (ListView) getView().findViewById(R.id.trailersListView);
         TrailerAdapter trailerAdapter = new TrailerAdapter(getContext(),movieTrailers);
-        trailerListView.setAdapter(trailerAdapter);
+        trailerListView.setAdapter(trailerAdapter);*/
+
+
+        RecyclerView trailerRecyclerView = (RecyclerView) getView().findViewById(R.id.trailersRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        trailerRecyclerView.setLayoutManager(layoutManager);
+        RecyclerView.Adapter adapter = new TrailerRecyclerAdapter(getContext(),movieTrailers);
+        trailerRecyclerView.setAdapter(adapter);
     }
 
 }

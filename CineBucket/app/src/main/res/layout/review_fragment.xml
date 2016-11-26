@@ -8,6 +8,7 @@
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:textColor="@color/reviewsHeadingColor"
         android:padding="@dimen/reviewPadding"
         android:text="@string/review_heading"
         android:textSize="@dimen/reviewHeadingTextSize"/>

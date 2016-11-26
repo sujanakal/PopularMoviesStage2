@@ -12,15 +12,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.2"
-        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
-        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.3.0_22bdbf5e89f5a32260c86d9c1848090318ac1286.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\palette-v7\22.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -30,12 +21,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\User\gradle-3.1\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.2.0\f7873a2ebde246a45c2a8d6f3247108b4c88a879\okhttp-3.2.0.jar"
+        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.2"
-        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
-        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\okhttp-3.2.0_433b701497dbc2f6e075828063ed6885174ca1c3.jar" />
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_297844d4ba74e9ccf63991a1d65fc15a30123cb4.jar" />
     </item>
     <item
         is-multidex="false"
@@ -48,39 +39,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\User\gradle-3.1\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.0.2\43eeae0b9fb087bb3194ba59ab63a38a32fbf3e\retrofit-2.0.2.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.2"
-        sha1="043eeae0b9fb087bb3194ba59ab63a38a32fbf3e">
-        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\retrofit-2.0.2_2ed5cba934472b12b29e7b171318128eaf726baa.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\User\AppData\Local\Android\sdk2\extras\android\m2repository\com\android\support\support-annotations\23.3.0\support-annotations-23.3.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.2"
         sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
         <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\support-annotations-23.3.0_a9869c31df77e4cb5853eb40e2805ba15a2e3905.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\User\gradle-3.1\caches\modules-2\files-2.1\com.squareup\javapoet\1.2.0\ad3ba65c1788f4d814a4da056323e2b84412fb3c\javapoet-1.2.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.2"
-        sha1="ad3ba65c1788f4d814a4da056323e2b84412fb3c">
-        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\javapoet-1.2.0_1acf2bed0834db419d3f0f8a8b8669b276dddaf0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.2"
-        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
-        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.3.0_e6740d887f6382f03db0d7e48654f48a6a4a57eb.jar" />
     </item>
     <item
         is-multidex="false"
@@ -111,6 +75,69 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.3.0_dc3f17382e32bb353d7b41f30b56ef620273b63f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.3.0_02b7c8d5754980553e92a5b0d32d1e49775e5d63.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.3.0_22bdbf5e89f5a32260c86d9c1848090318ac1286.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\gradle-3.1\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.2.0\f7873a2ebde246a45c2a8d6f3247108b4c88a879\okhttp-3.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\okhttp-3.2.0_433b701497dbc2f6e075828063ed6885174ca1c3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\gradle-3.1\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.0.2\43eeae0b9fb087bb3194ba59ab63a38a32fbf3e\retrofit-2.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="043eeae0b9fb087bb3194ba59ab63a38a32fbf3e">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\retrofit-2.0.2_2ed5cba934472b12b29e7b171318128eaf726baa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\gradle-3.1\caches\modules-2\files-2.1\com.squareup\javapoet\1.2.0\ad3ba65c1788f4d814a4da056323e2b84412fb3c\javapoet-1.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="ad3ba65c1788f4d814a4da056323e2b84412fb3c">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\javapoet-1.2.0_1acf2bed0834db419d3f0f8a8b8669b276dddaf0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.2"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.3.0_e6740d887f6382f03db0d7e48654f48a6a4a57eb.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\User\gradle-3.1\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
         jumboMode="false"
         optimize="true"
@@ -135,24 +162,6 @@
         revision="23.0.2"
         sha1="6ea7739b37769de4586bb097934120e8297f63ae">
         <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\simple_sql_provider_annotation-1.0.6_438b449c82cc0833615d04461717e49b6e8ea0a6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.3.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.2"
-        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
-        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.3.0_dc3f17382e32bb353d7b41f30b56ef620273b63f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.3.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.2"
-        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
-        <dex dex="C:\Users\User\PopularMoviesStage2\CineBucket\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.3.0_02b7c8d5754980553e92a5b0d32d1e49775e5d63.jar" />
     </item>
 
 </items>
