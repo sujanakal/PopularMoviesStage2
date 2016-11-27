@@ -3,7 +3,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/trailerPadding">
+    android:paddingLeft="@dimen/trailerPadding"
+    android:paddingRight="@dimen/trailerPadding"
+    android:paddingTop="@dimen/trailerLinearLayoutPadding"
+    android:paddingBottom="@dimen/trailerLinearLayoutPadding">
 
     <ImageView
         android:layout_height="wrap_content"
@@ -14,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:paddingLeft="@dimen/trailerPadding"
+        android:layout_gravity="center"
         android:textSize="@dimen/trailerNameTextSize"
         android:id="@+id/trailer_text"
         android:text="Trailer"/>

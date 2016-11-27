@@ -9,4 +9,5 @@
     <color name="background">#FFFFFF</color>
     <color name="reviewsHeadingColor">#E91E63</color>
     <color name="trailersHeadingColor">#E91E63</color>
+    <color name="horizontalRuleColor">#F8BBD0</color>
 </resources>

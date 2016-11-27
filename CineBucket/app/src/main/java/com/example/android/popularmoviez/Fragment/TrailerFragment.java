@@ -3,19 +3,14 @@ package com.example.android.popularmoviez.Fragment;
 import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.android.popularmoviez.Adapters.TrailerAdapter;
-import com.example.android.popularmoviez.Adapters.TrailerRecyclerAdapter;
 import com.example.android.popularmoviez.Util.ApiKey;
 import com.example.android.popularmoviez.Model.Trailers;
 import com.example.android.popularmoviez.R;
@@ -44,12 +39,13 @@ public class TrailerFragment extends Fragment {
     ApiKey key = new ApiKey();
     String TAG = "TrailerFragment";
     LinearLayout parent;
-    String TYPE = "Trailer";
+    String YOUTUBE_URL = "https://www.youtube.com/watch?v=";
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstantState){
        //return layoutInflater.inflate(R.layout.trailer_fragment,container,false);
        // return layoutInflater.inflate(R.layout.trailers_recyclerview,container,false);
-        View rootView = layoutInflater.inflate(R.layout.trailers_customview,container,false);
+        View rootView = layoutInflater.inflate(R.layout.trailers_dynamiclayout,container,false);
         parent = (LinearLayout) rootView.findViewById(R.id.trailerCustomParent);
         return rootView;
     }
@@ -72,7 +68,8 @@ public class TrailerFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void v){
-            loadTrailersAdapter(movieTrailers);
+            //loadTrailersAdapter(movieTrailers);
+            loadMovieTrailers(movieTrailers);
         }
     }
 
@@ -171,16 +168,18 @@ public class TrailerFragment extends Fragment {
         trailerRecyclerView.setLayoutManager(layoutManager);
         RecyclerView.Adapter adapter = new TrailerRecyclerAdapter(getContext(),movieTrailers);
         trailerRecyclerView.setAdapter(adapter);*/
+    }
 
+    public void loadMovieTrailers(ArrayList<Trailers> movieTrailers){
         Trailers mTrailers;
         for(int i=0;i<movieTrailers.size();i++){
             mTrailers=movieTrailers.get(i);
-                View child = LayoutInflater.from(getContext()).inflate(R.layout.trailers,null);
-                TextView tName = (TextView) child.findViewById(R.id.trailer_text);
-                ImageView tIcon = (ImageView) child.findViewById(R.id.trailer_icon);
-                tName.setText(mTrailers.getName());
-                tIcon.setImageResource(R.drawable.ic_heart);
-                parent.addView(child);
+            View child = LayoutInflater.from(getContext()).inflate(R.layout.trailers,null);
+            TextView tName = (TextView) child.findViewById(R.id.trailer_text);
+            ImageView tIcon = (ImageView) child.findViewById(R.id.trailer_icon);
+            tName.setText(mTrailers.getName());
+            tIcon.setImageResource(R.drawable.trailer_icon_mdpi);
+            parent.addView(child);
         }
     }
 

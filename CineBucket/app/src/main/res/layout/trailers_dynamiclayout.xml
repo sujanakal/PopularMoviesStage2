@@ -7,13 +7,17 @@
     android:id="@+id/trailerCustomParent">
 
     <TextView
+        style="@style/headingPadding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/trailerHeading"
         android:textSize="@dimen/trailerHeadingTextSize"
-        android:padding="@dimen/trailerPadding"
         android:textColor="@color/trailersHeadingColor"
         android:text="@string/trailerHeadingText"/>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/horizontalRule"
+        android:background="@color/horizontalRuleColor" />
 
 
 </LinearLayout>

@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.android.popularmoviez.Adapters.ReviewAdapter;
 import com.example.android.popularmoviez.Util.ApiKey;
@@ -37,11 +39,15 @@ public class ReviewFragment extends Fragment {
     String TAG = ReviewFragment.class.getSimpleName();
     ArrayList<Reviews> movieReviews = new ArrayList<>();
     ApiKey key = new ApiKey();
+    LinearLayout parent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.review_fragment,container,false);
+        //View rootView = inflater.inflate(R.layout.review_fragment,container,false);
+        View rootView = inflater.inflate(R.layout.review_dynamiclayout,container,false);
+        parent = (LinearLayout) rootView.findViewById(R.id.reviewCustomLayout);
+        return rootView;
     }
     @Override
     public void onStart()
@@ -76,7 +82,8 @@ public class ReviewFragment extends Fragment {
         @Override
         protected void onPostExecute(Void v)
         {
-            loadReviewAdapter(movieReviews);
+            //loadReviewAdapter(movieReviews);
+            loadMovieReviews(movieReviews);
         }
     }
 
@@ -168,8 +175,16 @@ public class ReviewFragment extends Fragment {
     }
 
 
-
-
-
-
+    public void loadMovieReviews(ArrayList<Reviews> mRev){
+        Reviews mReviews;
+        for (int i=0; i<mRev.size();i++){
+            mReviews = mRev.get(i);
+            LinearLayout child = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.reviews,null);
+            TextView rAuthor = (TextView) child.findViewById(R.id.review_author);
+            TextView rContent = (TextView) child.findViewById(R.id.review_content);
+            rAuthor.setText(mReviews.getAuthor());
+            rContent.setText(mReviews.getContent());
+            parent.addView(child);
+        }
+    }
 }

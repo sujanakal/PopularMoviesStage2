@@ -16,7 +16,7 @@
     <dimen name="release_date_text_size">24sp</dimen>
     <dimen name="poplarity_size">20sp</dimen>
     <dimen name="detail_rate_count">14sp</dimen>
-    <dimen name="detail_overview_size">20sp</dimen>
+    <dimen name="detail_overview_size">18sp</dimen>
     <dimen name="title_elevation">10dp</dimen>
 
     <dimen name="appBarLayout">4dp</dimen>
@@ -27,11 +27,15 @@
     <dimen name="reviewHeadingTextSize">24sp</dimen>
     <dimen name="reviewPadding">20dp</dimen>
     <dimen name="reviewTextSize">16sp</dimen>
+    <dimen name="headingBottomPadding">10dp</dimen>
 
     <dimen name="trailerPadding">20dp</dimen>
     <dimen name="trailerHeadingTextSize">24sp</dimen>
     <dimen name="trailerNameTextSize">18sp</dimen>
+    <dimen name="trailerLinearLayoutPadding">10dp</dimen>
 
     <dimen name="floatingActionBarWidth">16dp</dimen>
     <dimen name="floatingActionBarHeight">16dp</dimen>
+    
+    <dimen name="horizontalRule">2dp</dimen>
 </resources>
