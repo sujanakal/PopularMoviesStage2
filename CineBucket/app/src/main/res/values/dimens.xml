@@ -30,7 +30,7 @@
 
     <dimen name="trailerPadding">20dp</dimen>
     <dimen name="trailerHeadingTextSize">24sp</dimen>
-    <dimen name="trailerNameTextSize">20sp</dimen>
+    <dimen name="trailerNameTextSize">18sp</dimen>
 
     <dimen name="floatingActionBarWidth">16dp</dimen>
     <dimen name="floatingActionBarHeight">16dp</dimen>
