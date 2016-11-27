@@ -1,6 +1,8 @@
 package com.example.android.popularmoviez.Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -174,13 +176,19 @@ public class TrailerFragment extends Fragment {
         Trailers mTrailers;
         for(int i=0;i<movieTrailers.size();i++){
             mTrailers=movieTrailers.get(i);
+            final String key = mTrailers.getKey();
             View child = LayoutInflater.from(getContext()).inflate(R.layout.trailers,null);
             TextView tName = (TextView) child.findViewById(R.id.trailer_text);
             ImageView tIcon = (ImageView) child.findViewById(R.id.trailer_icon);
             tName.setText(mTrailers.getName());
             tIcon.setImageResource(R.drawable.trailer_icon_mdpi);
+            tIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_URL+key)));
+                }
+            });
             parent.addView(child);
         }
     }
-
 }
