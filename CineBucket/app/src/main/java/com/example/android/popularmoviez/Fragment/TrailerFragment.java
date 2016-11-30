@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.android.popularmoviez.Util.ApiKey;
+import com.example.android.popularmoviez.Utility.ApiKey;
 import com.example.android.popularmoviez.Model.Trailers;
 import com.example.android.popularmoviez.R;
 
@@ -176,16 +176,17 @@ public class TrailerFragment extends Fragment {
         Trailers mTrailers;
         for(int i=0;i<movieTrailers.size();i++){
             mTrailers=movieTrailers.get(i);
-            final String key = mTrailers.getKey();
+            final String youTubeUrl = YOUTUBE_URL+mTrailers.getKey();
             View child = LayoutInflater.from(getContext()).inflate(R.layout.trailers,null);
             TextView tName = (TextView) child.findViewById(R.id.trailer_text);
             ImageView tIcon = (ImageView) child.findViewById(R.id.trailer_icon);
             tName.setText(mTrailers.getName());
-            tIcon.setImageResource(R.drawable.trailer_icon_mdpi);
+            tIcon.setImageResource(R.drawable.trailer_icon_shadow_mdpi);
+            Log.d("TrailerFragment","Key got: "+mTrailers.getKey());
             tIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_URL+key)));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeUrl)));
                 }
             });
             parent.addView(child);

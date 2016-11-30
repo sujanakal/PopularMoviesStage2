@@ -41,7 +41,7 @@ public class Trailers {
     public void setIso_639_1(String iso_639_1){ this.iso_639_1=iso_639_1; }
     public String getIso_639_1() { return iso_639_1; }
 
-    public void setKey(String name){ this.key=key; }
+    public void setKey(String key){ this.key=key; }
     public String getKey() { return key; }
 
     public void setName(String name){ this.name=name; }

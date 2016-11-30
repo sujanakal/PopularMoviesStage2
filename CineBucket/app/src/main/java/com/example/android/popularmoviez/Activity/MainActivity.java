@@ -12,7 +12,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -24,9 +23,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.example.android.popularmoviez.Util.ApiKey;
+import com.example.android.popularmoviez.Utility.ApiKey;
 import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
 import com.squareup.picasso.Picasso;

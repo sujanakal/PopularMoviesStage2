@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.android.popularmoviez.Adapters.ReviewAdapter;
-import com.example.android.popularmoviez.Util.ApiKey;
+import com.example.android.popularmoviez.Utility.ApiKey;
 import com.example.android.popularmoviez.Model.Reviews;
 import com.example.android.popularmoviez.R;
 
