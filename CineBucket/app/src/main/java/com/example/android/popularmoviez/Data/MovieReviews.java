@@ -10,11 +10,17 @@ import ckm.simple.sql_provider.annotation.SimpleSQLTable;
  */
 @SimpleSQLTable(table = "reviews", provider = App.MOVIE_PROVIDER)
 
-public class ReviewsTable {
+public class MovieReviews {
     @SimpleSQLColumn(value = "id",primary = true)
-    public String r_id;
+    public int r_id;
 
-    @SimpleSQLColumn(value = "author",primary = true)
+    @SimpleSQLColumn("movie_id")
+    public int movie_id;
+
+    @SimpleSQLColumn("review_id")
+    public String review_id;
+
+    @SimpleSQLColumn("author")
     public String author;
 
     @SimpleSQLColumn("url")

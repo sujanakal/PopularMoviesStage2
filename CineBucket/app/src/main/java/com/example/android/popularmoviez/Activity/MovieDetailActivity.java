@@ -16,6 +16,8 @@ import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 /**
  * Created by Suj🌠 on 21-08-2016.
  */

@@ -22,6 +22,7 @@ import com.example.android.popularmoviez.Activity.MainActivity;
 import com.example.android.popularmoviez.Activity.MovieDetailActivity;
 import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
+import com.example.android.popularmoviez.Utility.Helper;
 import com.squareup.picasso.Picasso;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -32,19 +33,20 @@ public class MovieDetailFragment extends Fragment {
     boolean favoriteButtonState;
     String TAG = MovieDetailFragment.class.getSimpleName();
     static String FAV_STATE = "favState";
+    Movie getMovie;
 
 
     @Override
     public void onSaveInstanceState(Bundle outState){
-        outState.putBoolean(FAV_STATE,favoriteButtonState);
+        outState.putBoolean(FAV_STATE,getMovie.isFavorite());
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
         if(savedInstanceState!= null){
-            favoriteButtonState = savedInstanceState.getBoolean(FAV_STATE);
-            saveInSharedPreference(favoriteButtonState);
+            getMovie.setFavorite(savedInstanceState.getBoolean(FAV_STATE));
+            saveInSharedPreference(getMovie.isFavorite());
         }
         super.onActivityCreated(savedInstanceState);
     }
@@ -57,28 +59,51 @@ public class MovieDetailFragment extends Fragment {
 
     }
 
+
+    /*@Override
+    public void onDetach(){
+        saveInSharedPreference(getMovie.isFavorite());
+        super.onDetach();
+    }
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        getMovie.setFavorite(favoriteSharedPreferences.getBoolean("favorite",Boolean.FALSE));
+    }*/
+
+
     @Override
     public void onStart() {
         super.onStart();
+        getMovie = getArguments().getParcelable("Movie");
 
-
-        movieDetails();
-        favoriteSharedPreferences = getContext().getSharedPreferences("FavoritePref", MODE_PRIVATE);
+        movieDetails(getMovie);
+        favoriteSharedPreferences = getActivity().getSharedPreferences("FavoritePref", MODE_PRIVATE);
         favEditor = favoriteSharedPreferences.edit();
         final FloatingActionButton floatingActionButton = (FloatingActionButton) getView().findViewById(R.id.favoriteButton);
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!favoriteButtonState){
+                if(!getMovie.isFavorite()){
+                    //adding to favorites list
+
                     floatingActionButton.setImageResource(R.drawable.ic_heart);
-                    favoriteButtonState = true;
-                    saveInSharedPreference(favoriteButtonState);
+                    Helper.insertIntoFavoriteTable(getActivity(),getMovie.getId());
+
+                    getMovie.setFavorite(Boolean.TRUE);
+                    saveInSharedPreference(getMovie.isFavorite());
                 }
                 else{
+                    //removing from favorites list
+
                     floatingActionButton.setImageResource(R.drawable.ic_heart_outline);
-                    favoriteButtonState = false;
-                    saveInSharedPreference(favoriteButtonState);
+                    Helper.deleteFromFavoriteTable(getActivity(), getMovie.getId());
+
+                    getMovie.setFavorite(Boolean.FALSE);
+                    saveInSharedPreference(getMovie.isFavorite());
                 }
             }
         });
@@ -89,14 +114,21 @@ public class MovieDetailFragment extends Fragment {
         favEditor.commit();
     }
 
-    private void movieDetails() {
-        Movie getMovie = getArguments().getParcelable("Movie");
+    private void movieDetails(Movie getMovie) {
 
         Log.d(TAG, "getMovie content: " + getMovie);
         CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) getView().findViewById(R.id.collapsing_toolbar_layout);
 
         if (getMovie != null) {
+
+            FloatingActionButton favButton = (FloatingActionButton) getView().findViewById(R.id.favoriteButton);
+            if(getMovie.isFavorite()){
+                favButton.setImageResource(R.drawable.ic_heart);
+            }
+            else{
+                favButton.setImageResource(R.drawable.ic_heart_outline);
+            }
 
             collapsingToolbarLayout.setTitle(getMovie.getTitle());
             collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.LargeText);

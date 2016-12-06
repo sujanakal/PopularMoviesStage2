@@ -10,7 +10,10 @@ import ckm.simple.sql_provider.annotation.SimpleSQLTable;
  */
 @SimpleSQLTable(table = "favorite", provider = App.MOVIE_PROVIDER)
 
-public class FavoriteTable {
-    @SimpleSQLColumn(value = "id", primary = true)
-    public String f_id;
+public class FavoriteMovies {
+    @SimpleSQLColumn(value = "f_id", primary = true)
+    public int f_id;
+
+    @SimpleSQLColumn("movie_id")
+    public int movie_id;
 }

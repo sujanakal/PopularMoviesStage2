@@ -10,9 +10,15 @@ import ckm.simple.sql_provider.annotation.SimpleSQLTable;
  */
 @SimpleSQLTable(table = "trailers", provider = App.MOVIE_PROVIDER)
 
-public class TrailersTable {
+public class MovieTrailers {
     @SimpleSQLColumn(value = "id",primary = true)
-    public String t_id;
+    public int t_id;
+
+    @SimpleSQLColumn("movie_id")
+    public int movie_id;
+
+    @SimpleSQLColumn("trailer_id")
+    public String trailer_id;
 
     @SimpleSQLColumn("iso_3166_1")
     public String iso_3166_1;
@@ -20,7 +26,7 @@ public class TrailersTable {
     @SimpleSQLColumn("iso_639_1")
     public String iso_639_1;
 
-    @SimpleSQLColumn(value = "key",primary = true)
+    @SimpleSQLColumn("key")
     public String key;
 
     @SimpleSQLColumn("name")

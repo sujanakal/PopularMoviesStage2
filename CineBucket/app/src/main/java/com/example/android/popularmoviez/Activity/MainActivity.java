@@ -1,13 +1,10 @@
 package com.example.android.popularmoviez.Activity;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +24,7 @@ import android.widget.ImageView;
 import com.example.android.popularmoviez.Utility.ApiKey;
 import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
+import com.example.android.popularmoviez.Utility.Helper;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -50,16 +48,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     GridView myGrid;
     ArrayList<Movie> mPopularList = new ArrayList<>();
     ArrayList<Movie> mTopVotedList = new ArrayList<>();
+    ArrayList<Movie> mFavoriteList = new ArrayList<>();
     final static String POPULAR_LIST = "popularList";
     final static String TOP_VOTE_LIST = "topVoteList";
+    final static String FAVORITE_LIST = "favoriteList";
     String progressDialogMessage = "Loading... Please wait...";
     ApiKey key = new ApiKey();
-    String noInternerConnection = "No Internet connection!";
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
         outState.putSerializable(POPULAR_LIST,mPopularList);
         outState.putSerializable(TOP_VOTE_LIST,mTopVotedList);
+        outState.putSerializable(FAVORITE_LIST,mFavoriteList);
         super.onSaveInstanceState(outState);
 
     }
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mPopularList = (ArrayList<Movie>) savedInstanceState.getSerializable(POPULAR_LIST);
         mTopVotedList = (ArrayList<Movie>) savedInstanceState.getSerializable(TOP_VOTE_LIST);
+        mFavoriteList = (ArrayList<Movie>) savedInstanceState.getSerializable(FAVORITE_LIST);
         loadMovies();
     }
 
@@ -112,26 +113,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         MovieTask task = new MovieTask();
 
-        if(isOnline()){
+        if(Helper.isOnline(getApplicationContext())){
             task.execute();
         }
 
-    }
-
-    public boolean isOnline(){
-        String alertTitle = "Network Error!";
-        String alertMessage = "Could not load the movies.\nPlease check your network settings and try again!";
-        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if(networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
-            //Toast.makeText(getApplicationContext(),noInternerConnection, Toast.LENGTH_LONG).show();
-            AlertDialog noInternetAlert = new AlertDialog.Builder(this).create();
-            noInternetAlert.setTitle(alertTitle);
-            noInternetAlert.setMessage(alertMessage);
-            noInternetAlert.show();
-            return false;
-        }
-        return true;
     }
 
     @Override
@@ -209,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             String url_popularity = "https://api.themoviedb.org/3/movie/popular?api_key=";
             String url_topvote = "https://api.themoviedb.org/3/movie/top_rated?api_key=";
 
+            // TODO: 01-12-2016 add the code to insert the values into the MovieDetail table.
             getJson(url_popularity,mPopularList);
             getJson(url_topvote,mTopVotedList);
 
@@ -236,6 +222,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (sharedPreferences.getString("PREF_FILE","Popularity").equals("Popularity"))
         {
              loadMovieImageAdapter(mPopularList);
+        }
+        else if(sharedPreferences.getString("PREF_FILE","Popularity").equals("Favorite")){
+            // TODO: 01-12-2016 code to get the values from dB tables and update the UI.
+
+            Helper.getFavoritesList(getApplicationContext(),mFavoriteList);
+            loadMovieImageAdapter(mFavoriteList);
         }
 //      If the sort by option choosen by the user is Ratings load the adapter with the mTopVotedList arraylist
         else
@@ -312,6 +304,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 final  String ORIGINAL_TITLE = "original_title";
                 final  String V_AVERAGE = "vote_average";
                 final  String V_COUNT = "vote_count";
+                final  String ADULT = "adult";
+                final  String ORIGINAL_LANGUAGE = "original_language";
 
 //              To get the main json object
                 JSONObject jsonObject = new JSONObject(input);
@@ -338,9 +332,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     iMovie.setTitle(iObject.getString(MOVIE_TITLE));
                     iMovie.setVote_average(iObject.getDouble(V_AVERAGE));
                     iMovie.setVote_count(iObject.getInt(V_COUNT));
+                    iMovie.setAdult(iObject.getBoolean(ADULT));
+                    iMovie.setOriginalLanguage(iObject.getString(ORIGINAL_LANGUAGE));
+                    iMovie.setFavorite(Boolean.FALSE);
 
                     list.add(iMovie);
 
+                    Helper.insertIntoMovieDetailsTable(getApplicationContext() ,iMovie);
                 }
             }
 
@@ -376,6 +374,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }
     }
+
 
 
     public class MovieImageAdapter extends ArrayAdapter<Movie> {
