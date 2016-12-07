@@ -31,11 +31,26 @@ import static android.content.Context.MODE_PRIVATE;
 public class MovieDetailFragment extends Fragment {
     SharedPreferences favoriteSharedPreferences ;
     Editor favEditor;
-    boolean favoriteButtonState;
+    final static String DETAIL_STATE = "detail_state";
     String TAG = MovieDetailFragment.class.getSimpleName();
     final static int FALSE = 0;
     final static int TRUE = 1;
     Movie getMovie;
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(DETAIL_STATE, getMovie);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState){
+        super.onViewStateRestored(savedInstanceState);
+        if(savedInstanceState != null){
+            getMovie = savedInstanceState.getParcelable(DETAIL_STATE);
+            movieDetails(getMovie);
+        }
+    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -65,6 +80,7 @@ public class MovieDetailFragment extends Fragment {
 
                     floatingActionButton.setImageResource(R.drawable.ic_heart);
                     Helper.insertIntoFavoriteTable(getActivity(),getMovie.getId());
+                    getMovie.setFavorite(TRUE);
                     Helper.updateMovieDetailFavColumn(context, getMovie.getId(), TRUE);
                 }
                 else{
@@ -72,6 +88,7 @@ public class MovieDetailFragment extends Fragment {
 
                     floatingActionButton.setImageResource(R.drawable.ic_heart_outline);
                     Helper.deleteFromFavoriteTable(getActivity(), getMovie.getId());
+                    getMovie.setFavorite(FALSE);
                     Helper.updateMovieDetailFavColumn(context, getMovie.getId(), FALSE);
                 }
             }

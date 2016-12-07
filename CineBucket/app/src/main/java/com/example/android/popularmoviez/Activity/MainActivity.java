@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
 
@@ -218,6 +217,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //  Function to get the value of the setting stored
 //  in the default Sharedpreference file  and then to load the adapter
     private void loadMovies() {
+
+        if((mPopularList == null) || mTopVotedList == null){
+            MovieTask movieTask = new MovieTask();
+            movieTask.execute();
+        }
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 //      If the sort by option choosen by the user is Popularity load the adapter with the mPopularList arraylist
