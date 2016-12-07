@@ -2,6 +2,7 @@ package com.example.android.popularmoviez.Utility;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
@@ -17,6 +18,7 @@ import com.example.android.popularmoviez.Data.MovieDetails;
 import com.example.android.popularmoviez.Data.MovieReviews;
 import com.example.android.popularmoviez.Data.MovieTrailers;
 import com.example.android.popularmoviez.Data.MoviesTable;
+
 import com.example.android.popularmoviez.Fragment.ReviewFragment;
 import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.Model.Reviews;
@@ -56,6 +58,8 @@ public class Helper {
     static final  String ID = "id";
     static final  String SITE = "site";
     static final  String SIZE = "size";
+    static final int TRUE = 1;
+    static final int FALSE = 0;
 
     public static void getReviews(String reviews, ArrayList<Reviews> reviewList) {
         BufferedReader buf = null;
@@ -265,6 +269,7 @@ public class Helper {
         movieEntry.popularity = mObj.getPopularity();
         movieEntry.voteCount = mObj.getVote_count();
         movieEntry.voteAverage = mObj.getVote_average();
+        movieEntry.favorite = mObj.isFavorite();
 
         context.getContentResolver().insert(MoviesTable.CONTENT_URI,MoviesTable.getContentValues(movieEntry,false));
     }
@@ -309,11 +314,42 @@ public class Helper {
             movie.setVote_count(movieRow.voteCount);
             movie.setAdult(movieRow.adult);
             movie.setOriginalLanguage(movieRow.originalLanguage);
-            movie.setFavorite(Boolean.TRUE);
-            // TODO: 06-12-2016 add isFavorite field also in Database Table
+            movie.setFavorite(TRUE);
 
             mFavList.add(movie);
         }
     }
 
+
+    public static void updateMovieDetailFavColumn(Context context, int movieId, int flag){
+        String[] updateArg = new String[1];
+        updateArg[0] = String.valueOf(movieId);
+        ContentValues values = new ContentValues();
+        values.put("favorite", flag);
+// update the Table's favorite column.
+        context.getContentResolver().update(MoviesTable.CONTENT_URI,values,"movie_id=?",updateArg);
+    }
+
+
+    public static void getMovies(Context context, Movie movie){
+        String[] queryArg = new String[1];
+        queryArg[0] = String.valueOf(movie.getId());
+
+        Cursor movieRow = context.getContentResolver().query(MoviesTable.CONTENT_URI,null,"movie_id=?",queryArg,null);
+        MovieDetails movieResult = MoviesTable.getRow(movieRow,false);
+
+        movie.setBackdrop_path(movieResult.backdropPath);
+        movie.setId(movieResult.movie_id);
+        movie.setOriginal_title(movieResult.originalTitle);
+        movie.setOverview(movieResult.overview);
+        movie.setRelease_date(movieResult.releaseDate);
+        movie.setPoster_path(movieResult.posterPath);
+        movie.setPopularity(movieResult.popularity);
+        movie.setTitle(movieResult.Title);
+        movie.setVote_average(movieResult.voteAverage);
+        movie.setVote_count(movieResult.voteCount);
+        movie.setAdult(movieResult.adult);
+        movie.setOriginalLanguage(movieResult.originalLanguage);
+        movie.setFavorite(movieResult.favorite);
+    }
 }

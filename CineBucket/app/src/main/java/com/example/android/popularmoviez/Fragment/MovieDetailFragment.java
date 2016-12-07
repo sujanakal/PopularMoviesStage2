@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.*;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -32,24 +33,9 @@ public class MovieDetailFragment extends Fragment {
     Editor favEditor;
     boolean favoriteButtonState;
     String TAG = MovieDetailFragment.class.getSimpleName();
-    static String FAV_STATE = "favState";
+    final static int FALSE = 0;
+    final static int TRUE = 1;
     Movie getMovie;
-
-
-    @Override
-    public void onSaveInstanceState(Bundle outState){
-        outState.putBoolean(FAV_STATE,getMovie.isFavorite());
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState){
-        if(savedInstanceState!= null){
-            getMovie.setFavorite(savedInstanceState.getBoolean(FAV_STATE));
-            saveInSharedPreference(getMovie.isFavorite());
-        }
-        super.onActivityCreated(savedInstanceState);
-    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -59,27 +45,14 @@ public class MovieDetailFragment extends Fragment {
 
     }
 
-
-    /*@Override
-    public void onDetach(){
-        saveInSharedPreference(getMovie.isFavorite());
-        super.onDetach();
-    }
-
-    @Override
-    public void onAttach(Context context){
-        super.onAttach(context);
-        getMovie.setFavorite(favoriteSharedPreferences.getBoolean("favorite",Boolean.FALSE));
-    }*/
-
-
     @Override
     public void onStart() {
         super.onStart();
         getMovie = getArguments().getParcelable("Movie");
+        final Context context = getActivity();
 
         movieDetails(getMovie);
-        favoriteSharedPreferences = getActivity().getSharedPreferences("FavoritePref", MODE_PRIVATE);
+        favoriteSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         favEditor = favoriteSharedPreferences.edit();
         final FloatingActionButton floatingActionButton = (FloatingActionButton) getView().findViewById(R.id.favoriteButton);
 
@@ -87,31 +60,22 @@ public class MovieDetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(!getMovie.isFavorite()){
+                if(getMovie.isFavorite() == 0){
                     //adding to favorites list
 
                     floatingActionButton.setImageResource(R.drawable.ic_heart);
                     Helper.insertIntoFavoriteTable(getActivity(),getMovie.getId());
-
-                    getMovie.setFavorite(Boolean.TRUE);
-                    saveInSharedPreference(getMovie.isFavorite());
+                    Helper.updateMovieDetailFavColumn(context, getMovie.getId(), TRUE);
                 }
                 else{
                     //removing from favorites list
 
                     floatingActionButton.setImageResource(R.drawable.ic_heart_outline);
                     Helper.deleteFromFavoriteTable(getActivity(), getMovie.getId());
-
-                    getMovie.setFavorite(Boolean.FALSE);
-                    saveInSharedPreference(getMovie.isFavorite());
+                    Helper.updateMovieDetailFavColumn(context, getMovie.getId(), FALSE);
                 }
             }
         });
-    }
-
-    public void saveInSharedPreference(boolean val){
-        favEditor.putBoolean("favorite",val);
-        favEditor.commit();
     }
 
     private void movieDetails(Movie getMovie) {
@@ -123,7 +87,7 @@ public class MovieDetailFragment extends Fragment {
         if (getMovie != null) {
 
             FloatingActionButton favButton = (FloatingActionButton) getView().findViewById(R.id.favoriteButton);
-            if(getMovie.isFavorite()){
+            if(getMovie.isFavorite() == 1){
                 favButton.setImageResource(R.drawable.ic_heart);
             }
             else{

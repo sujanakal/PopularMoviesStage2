@@ -50,4 +50,7 @@ public class MovieDetails {
 
     @SimpleSQLColumn("vote_average")
     public Double voteAverage;
+
+    @SimpleSQLColumn("favorite")
+    public int favorite;
 }

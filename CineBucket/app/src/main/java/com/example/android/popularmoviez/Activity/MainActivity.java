@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     final static String FAVORITE_LIST = "favoriteList";
     String progressDialogMessage = "Loading... Please wait...";
     ApiKey key = new ApiKey();
+    final static int FALSE = 0;
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
@@ -155,12 +156,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Movie movie = (Movie) parent.getAdapter().getItem(position);
         /*Toast.makeText(MainActivity.this, "" + movie.getTitle(),
                 Toast.LENGTH_SHORT).show();*/
-
+        Helper.getMovies(getApplicationContext(), movie);
 //              To open the new activity (detailed activity)
 //              when a image in the gridview is clicked using Intents
-            Intent intent = new Intent(MainActivity.this , MovieDetailActivity.class);
-            intent.putExtra("Movie", movie);
-            startActivity(intent);
+
+        Intent intent = new Intent(MainActivity.this , MovieDetailActivity.class);
+        intent.putExtra("Movie", movie);
+        startActivity(intent);
 
            /* Bundle bundle = new Bundle();
             bundle.putParcelable("Movie",movie);
@@ -226,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         else if(sharedPreferences.getString("PREF_FILE","Popularity").equals("Favorite")){
             // TODO: 01-12-2016 code to get the values from dB tables and update the UI.
 
+            mFavoriteList.clear();
             Helper.getFavoritesList(getApplicationContext(),mFavoriteList);
             loadMovieImageAdapter(mFavoriteList);
         }
@@ -334,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     iMovie.setVote_count(iObject.getInt(V_COUNT));
                     iMovie.setAdult(iObject.getBoolean(ADULT));
                     iMovie.setOriginalLanguage(iObject.getString(ORIGINAL_LANGUAGE));
-                    iMovie.setFavorite(Boolean.FALSE);
+                    iMovie.setFavorite(FALSE);
 
                     list.add(iMovie);
 
