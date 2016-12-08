@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.popularmoviez.Data.FavoriteMovies;
 import com.example.android.popularmoviez.Data.FavoriteTable;
@@ -352,4 +353,10 @@ public class Helper {
         movie.setOriginalLanguage(movieResult.originalLanguage);
         movie.setFavorite(movieResult.favorite);
     }
+
+    public static void makeToast(Context context,String msg){
+        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+    }
+
+
 }

@@ -8,10 +8,8 @@ import android.content.SharedPreferences.*;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.popularmoviez.Activity.MainActivity;
-import com.example.android.popularmoviez.Activity.MovieDetailActivity;
 import com.example.android.popularmoviez.Model.Movie;
 import com.example.android.popularmoviez.R;
 import com.example.android.popularmoviez.Utility.Helper;
 import com.squareup.picasso.Picasso;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class MovieDetailFragment extends Fragment {
     SharedPreferences favoriteSharedPreferences ;
@@ -36,6 +30,8 @@ public class MovieDetailFragment extends Fragment {
     final static int FALSE = 0;
     final static int TRUE = 1;
     Movie getMovie;
+    final static String FAVORITE_ADDED = "Added to favorites.";
+    final static String FAVORITE_REMOVED = "Removed from favorites.";
 
     @Override
     public void onSaveInstanceState(Bundle outState){
@@ -82,6 +78,8 @@ public class MovieDetailFragment extends Fragment {
                     Helper.insertIntoFavoriteTable(getActivity(),getMovie.getId());
                     getMovie.setFavorite(TRUE);
                     Helper.updateMovieDetailFavColumn(context, getMovie.getId(), TRUE);
+
+                    Helper.makeToast(context,FAVORITE_ADDED);
                 }
                 else{
                     //removing from favorites list
@@ -90,6 +88,8 @@ public class MovieDetailFragment extends Fragment {
                     Helper.deleteFromFavoriteTable(getActivity(), getMovie.getId());
                     getMovie.setFavorite(FALSE);
                     Helper.updateMovieDetailFavColumn(context, getMovie.getId(), FALSE);
+
+                    Helper.makeToast(context,FAVORITE_REMOVED);
                 }
             }
         });

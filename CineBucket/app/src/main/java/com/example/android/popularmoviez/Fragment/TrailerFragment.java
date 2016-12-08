@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.android.popularmoviez.Model.Trailers;
 import com.example.android.popularmoviez.R;
 import com.example.android.popularmoviez.Utility.Helper;
@@ -33,48 +35,37 @@ public class TrailerFragment extends Fragment {
        // return layoutInflater.inflate(R.layout.trailers_recyclerview,container,false);
         View rootView = layoutInflater.inflate(R.layout.trailers_dynamiclayout,container,false);
         parent = (LinearLayout) rootView.findViewById(R.id.trailerCustomParent);
+        movieTrailers = getArguments().getParcelableArrayList("TrailerArrayList");
+
+        if(movieTrailers.isEmpty()){
+            Toast.makeText(getActivity(),"No Trailers found.",Toast.LENGTH_LONG).show();
+        }
+        else
+            loadMovieTrailers(movieTrailers);
         return rootView;
     }
-    @Override
+    /*@Override
     public void onStart(){
         super.onStart();
-        TrailerTask trailerTask = new TrailerTask();
-        trailerTask.execute();
+        movieTrailers = getArguments().getParcelableArrayList("TrailerArrayList");
+        loadMovieTrailers(movieTrailers);
     }
+*/
 
-    class TrailerTask extends AsyncTask<String,Void, Void>{
-
-        int MovieId = getArguments().getInt("MovieId");
-        @Override
-        protected Void doInBackground(String... params) {
-            String url_trailers = "https://api.themoviedb.org/3/movie/"+MovieId+"/videos?api_key=";
-            Helper.getTrailers(url_trailers,movieTrailers);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void v){
-            //loadTrailersAdapter(movieTrailers);
-            loadMovieTrailers(movieTrailers);
-        }
-    }
-
-    public void loadTrailersAdapter(ArrayList<Trailers> movieTrailers){
-        /*ListView trailerListView = (ListView) getView().findViewById(R.id.trailersListView);
+    /*public void loadTrailersAdapter(ArrayList<Trailers> movieTrailers){
+        *//*ListView trailerListView = (ListView) getView().findViewById(R.id.trailersListView);
         TrailerAdapter trailerAdapter = new TrailerAdapter(getContext(),movieTrailers);
         trailerListView.setNestedScrollingEnabled(false);
-        trailerListView.setAdapter(trailerAdapter);*/
+        trailerListView.setAdapter(trailerAdapter);*//*
 
 
-        /*RecyclerView trailerRecyclerView = (RecyclerView) getView().findViewById(R.id.trailersRecyclerView);
+        *//*RecyclerView trailerRecyclerView = (RecyclerView) getView().findViewById(R.id.trailersRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         trailerRecyclerView.setLayoutManager(layoutManager);
         RecyclerView.Adapter adapter = new TrailerRecyclerAdapter(getContext(),movieTrailers);
-        trailerRecyclerView.setAdapter(adapter);*/
-    }
+        trailerRecyclerView.setAdapter(adapter);*//*
+    }*/
 
-
-    // TODO: 01-12-2016 move this method to Helper class in Utility package. 
     
     public void loadMovieTrailers(ArrayList<Trailers> movieTrailers){
         Trailers mTrailers;
@@ -87,7 +78,8 @@ public class TrailerFragment extends Fragment {
             tName.setText(mTrailers.getName());
             tIcon.setImageResource(R.drawable.trailer_icon_shadow_mdpi);
             Log.d("TrailerFragment","Key got: "+mTrailers.getKey());
-            tIcon.setOnClickListener(new View.OnClickListener() {
+
+            child.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeUrl)));
