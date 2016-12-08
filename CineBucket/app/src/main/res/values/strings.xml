@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PopularMoviez</string>
+    <string name="app_name">Cine Bucket</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -11,11 +11,13 @@
     <string-array name="pref_entries">
         <item>Popularity</item>
         <item>Ratings</item>
+        <item>Favorite</item>
     </string-array>
 
     <string-array name="pref_entry_values">
         <item>Popularity</item>
         <item>Ratings</item>
+        <item>Favorite</item>
     </string-array>
 
     <string name="pref_default_value">Popularity</string>
@@ -40,4 +42,7 @@
     <string name="review_heading">Reviews</string>
     <string name="review_author">Author</string>
     <string name="review_content">Interstellar offers surprisingly cold (and often stiff) drama – albeit drama that is buoyed by high-minded science fiction scenarios and arresting visuals. Nolan relies heavily on lengthy scenes of surface-level exposition, where characters debate or outright explain complicated physics and philosophical ideas, to educate the audience and ruminate on humanity (both good and bad) in the face of death and destruction.</string>
+
+    <string name="trailerHeadingText">Trailers</string>
+
 </resources>

@@ -30,4 +30,11 @@
         <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
+    <style name="headingPadding">
+        <item name="android:paddingTop">@dimen/reviewPadding</item>
+        <item name="android:paddingLeft">@dimen/reviewPadding</item>
+        <item name="android:paddingRight">@dimen/reviewPadding</item>
+        <item name="android:paddingBottom">@dimen/headingBottomPadding</item>
+    </style>
+
 </resources>

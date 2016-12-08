@@ -40,9 +40,12 @@ public class Movie implements Parcelable {
 //    @SerializedName("vote_average")
     private Double voteAverage;
 
+    private int favorite;
+
     public Movie()
     {}
 
+    
     protected Movie(Parcel in) {
         backdropPath = in.readString();
         id = in.readInt();
@@ -54,7 +57,9 @@ public class Movie implements Parcelable {
         title = in.readString();
         voteAverage = in.readDouble();
         voteCount = in.readInt();
+        favorite = in.readInt();
     }
+
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -68,7 +73,9 @@ public class Movie implements Parcelable {
         dest.writeString(title);
         dest.writeDouble(voteAverage);
         dest.writeInt(voteCount);
+        dest.writeInt(favorite);
     }
+
 
     @Override
     public int describeContents() {
@@ -166,4 +173,7 @@ public class Movie implements Parcelable {
 
     public String getOriginalLanguage() { return originalLanguage; }
     public void setOriginalLanguage(String originalLanguage) { this.originalLanguage = originalLanguage; }
+
+    public void setFavorite(int favorite){ this.favorite = favorite; }
+    public int isFavorite(){ return favorite; }
 }
