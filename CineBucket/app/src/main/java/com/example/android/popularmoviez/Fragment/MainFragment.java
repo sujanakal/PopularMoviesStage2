@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -57,6 +58,12 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     String progressDialogMessage = "Loading... Please wait...";
     ApiKey key = new ApiKey();
     final static int FALSE = 0;
+
+    public interface MovieCallback{
+        void onGridItemSelected(Movie movie);
+    }
+
+    public MainFragment(){}
 
     @Override
     public void onSaveInstanceState(Bundle outState){
@@ -126,6 +133,9 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         View rootView = inflater.inflate(R.layout.main_fragment_xml, container, false);
+        Toolbar appbar = (Toolbar) rootView.findViewById(R.id.toolBar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(appbar);
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.statusBar));
         myGrid = (GridView) rootView.findViewById(R.id.movie_grid);
         MovieTask task = new MovieTask();
 
@@ -146,17 +156,19 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
         Movie movie = (Movie) parent.getAdapter().getItem(position);
-        /*Toast.makeText(MainFragment.this, "" + movie.getTitle(),
-                Toast.LENGTH_SHORT).show();*/
+        ((MovieCallback)getActivity()).onGridItemSelected(movie);
+
+        /*Movie movie = (Movie) parent.getAdapter().getItem(position);
+        *//*Toast.makeText(MainFragment.this, "" + movie.getTitle(),
+                Toast.LENGTH_SHORT).show();*//*
         Helper.getMovies(getActivity(), movie);
 //              To open the new activity (detailed activity)
 //              when a image in the gridview is clicked using Intents
 
         Intent intent = new Intent(getActivity() , MovieDetailActivity.class);
         intent.putExtra("Movie", movie);
-        startActivity(intent);
+        startActivity(intent);*/
 
            /* Bundle bundle = new Bundle();
             bundle.putParcelable("Movie",movie);

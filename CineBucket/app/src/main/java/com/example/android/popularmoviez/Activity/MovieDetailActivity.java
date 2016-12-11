@@ -30,98 +30,27 @@ import java.util.ArrayList;
 public class MovieDetailActivity extends AppCompatActivity {
 
     Movie getMovies;
-    ArrayList<Trailers> movieTrailers = new ArrayList<>();
-    ArrayList<Reviews> movieReviews = new ArrayList<>();
-    static int movieId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Intent getin = getIntent();
-        getMovies = getin.getParcelableExtra("Movie");
-        movieId = getMovies.getId();
-
-        DetailTask task = new DetailTask();
-        task.execute();
-
-        getWindow().setStatusBarColor(getResources().getColor(R.color.statusBar));
         setContentView(R.layout.movie_detail);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.statusBar));
 
-        /*Bundle bundle = new Bundle();
+        if(savedInstanceState == null){
+            Intent getIn = getIntent();
+            getMovies = getIn.getParcelableExtra("Movie");
 
-        bundle.putParcelable("Movie", getMovies);
-        MovieDetailFragment mFragment = new MovieDetailFragment();
-        mFragment.setArguments(bundle);
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.movieDetails,mFragment)
-                .commit();
-
-
-        bundle.putParcelableArrayList("TrailerArrayList",movieTrailers);
-        TrailerFragment tFragment = new TrailerFragment();
-        tFragment.setArguments(bundle);
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.movieTrailers,tFragment)
-                .commit();
-
-
-        bundle.putParcelableArrayList("ReviewArrayList",movieReviews);
-        ReviewFragment rFragment = new ReviewFragment();
-        rFragment.setArguments(bundle);
-        getFragmentManager()
-                .beginTransaction()
-                .replace(R.id.movieReviews,rFragment)
-                .commit();
-*/
-    }
-
-    class DetailTask extends AsyncTask<String, Void, Void>{
-
-
-        @Override
-        protected Void doInBackground(String... params) {
-            String url_reviews = "https://api.themoviedb.org/3/movie/"+movieId+"/reviews?api_key=";
-            String url_trailers = "https://api.themoviedb.org/3/movie/"+movieId+"/videos?api_key=";
-
-            Helper.getReviews(url_reviews,movieReviews);
-            Helper.getTrailers(url_trailers,movieTrailers);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void v){
             Bundle bundle = new Bundle();
-
             bundle.putParcelable("Movie", getMovies);
+
             MovieDetailFragment mFragment = new MovieDetailFragment();
             mFragment.setArguments(bundle);
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.movieDetails,mFragment)
-                    .commit();
-
-
-            bundle.putParcelableArrayList("TrailerArrayList",movieTrailers);
-            TrailerFragment tFragment = new TrailerFragment();
-            tFragment.setArguments(bundle);
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.movieTrailers,tFragment)
-                    .commit();
-
-
-            bundle.putParcelableArrayList("ReviewArrayList",movieReviews);
-            ReviewFragment rFragment = new ReviewFragment();
-            rFragment.setArguments(bundle);
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.movieReviews,rFragment)
+                    .add(R.id.movieDetails,mFragment)
                     .commit();
         }
     }
-
-
 }

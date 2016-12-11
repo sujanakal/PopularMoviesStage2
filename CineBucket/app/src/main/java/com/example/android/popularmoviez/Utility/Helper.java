@@ -334,24 +334,27 @@ public class Helper {
 
     public static void getMovies(Context context, Movie movie){
         String[] queryArg = new String[1];
-        queryArg[0] = String.valueOf(movie.getId());
+        if(movie != null) {
+            queryArg[0] = String.valueOf(movie.getId());
+            //queryArg[0] = String.valueOf(284052);
 
-        Cursor movieRow = context.getContentResolver().query(MoviesTable.CONTENT_URI,null,"movie_id=?",queryArg,null);
-        MovieDetails movieResult = MoviesTable.getRow(movieRow,false);
+            Cursor movieRow = context.getContentResolver().query(MoviesTable.CONTENT_URI,null,"movie_id=?",queryArg,null);
+            MovieDetails movieResult = MoviesTable.getRow(movieRow,false);
 
-        movie.setBackdrop_path(movieResult.backdropPath);
-        movie.setId(movieResult.movie_id);
-        movie.setOriginal_title(movieResult.originalTitle);
-        movie.setOverview(movieResult.overview);
-        movie.setRelease_date(movieResult.releaseDate);
-        movie.setPoster_path(movieResult.posterPath);
-        movie.setPopularity(movieResult.popularity);
-        movie.setTitle(movieResult.Title);
-        movie.setVote_average(movieResult.voteAverage);
-        movie.setVote_count(movieResult.voteCount);
-        movie.setAdult(movieResult.adult);
-        movie.setOriginalLanguage(movieResult.originalLanguage);
-        movie.setFavorite(movieResult.favorite);
+            movie.setBackdrop_path(movieResult.backdropPath);
+            movie.setId(movieResult.movie_id);
+            movie.setOriginal_title(movieResult.originalTitle);
+            movie.setOverview(movieResult.overview);
+            movie.setRelease_date(movieResult.releaseDate);
+            movie.setPoster_path(movieResult.posterPath);
+            movie.setPopularity(movieResult.popularity);
+            movie.setTitle(movieResult.Title);
+            movie.setVote_average(movieResult.voteAverage);
+            movie.setVote_count(movieResult.voteCount);
+            movie.setAdult(movieResult.adult);
+            movie.setOriginalLanguage(movieResult.originalLanguage);
+            movie.setFavorite(movieResult.favorite);
+        }
     }
 
     public static void makeToast(Context context,String msg){
