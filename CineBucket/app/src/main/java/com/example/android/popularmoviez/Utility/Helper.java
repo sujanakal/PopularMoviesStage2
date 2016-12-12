@@ -105,8 +105,6 @@ public class Helper {
                     iReviews.setUrl(iObject.getString(URL));
 
                     reviewList.add(iReviews);
-
-                    //insertIntoReviewsTable(iObject);
                 }
             }
         } catch (ProtocolException e) {
@@ -146,27 +144,12 @@ public class Helper {
         }
     }
 
-// TODO: 01-12-2016 Correct this!
-    /*public static void insertIntoReviewsTable(JSONObject object){
-        MovieReviews reviewEntry = new MovieReviews();
-        try {
-            reviewEntry.author = object.getString(AUTHOR);
-            reviewEntry.url = object.getString(URL;
-            reviewEntry.Content = o
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
-
     public static boolean isOnline(Context context){
         String alertTitle = "Network Error!";
         String alertMessage = "Could not load the movies.\nPlease check your network settings and try again!";
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if(networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
-            //Toast.makeText(getApplicationContext(),noInternerConnection, Toast.LENGTH_LONG).show();
             AlertDialog noInternetAlert = new AlertDialog.Builder(context).create();
             noInternetAlert.setTitle(alertTitle);
             noInternetAlert.setMessage(alertMessage);
@@ -327,7 +310,6 @@ public class Helper {
         updateArg[0] = String.valueOf(movieId);
         ContentValues values = new ContentValues();
         values.put("favorite", flag);
-// update the Table's favorite column.
         context.getContentResolver().update(MoviesTable.CONTENT_URI,values,"movie_id=?",updateArg);
     }
 
@@ -336,8 +318,6 @@ public class Helper {
         String[] queryArg = new String[1];
         if(movie != null) {
             queryArg[0] = String.valueOf(movie.getId());
-            //queryArg[0] = String.valueOf(284052);
-
             Cursor movieRow = context.getContentResolver().query(MoviesTable.CONTENT_URI,null,"movie_id=?",queryArg,null);
             MovieDetails movieResult = MoviesTable.getRow(movieRow,false);
 

@@ -59,8 +59,12 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
     ApiKey key = new ApiKey();
     final static int FALSE = 0;
 
-    public interface MovieCallback{
+    /*public interface MovieCallback{
         void onGridItemSelected(Movie movie);
+    }*/
+
+    public interface MovieCallback{
+        void onGridItemSelected(int position);
     }
 
     public MainFragment(){}
@@ -74,7 +78,6 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
 
     }
 
-
     @Override
     public void onViewStateRestored(Bundle savedInstanceState){
 
@@ -87,11 +90,9 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
         }
     }
 
-
     @Override
     public void onResume(){
         super.onResume();
-
         if (mPopularList == null || mTopVotedList == null)
         {
             MovieTask task = new MovieTask();
@@ -103,31 +104,7 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
         }
 
         myGrid.setOnItemClickListener(MainFragment.this);
-
-
-
     }
-
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    /*@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_fragment_xml);
-
-        myGrid = (GridView) findViewById(R.id.movie_grid);
-
-        *//*Toolbar appbar = (Toolbar) findViewById(R.id.toolBar);
-        setSupportActionBar(appbar);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.statusBar));*//*
-
-        MovieTask task = new MovieTask();
-
-        if(Helper.isOnline(getApplicationContext())){
-            task.execute();
-        }
-
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -145,36 +122,10 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
         return rootView;
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }*/
-
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        Movie movie = (Movie) parent.getAdapter().getItem(position);
-        ((MovieCallback)getActivity()).onGridItemSelected(movie);
-
-        /*Movie movie = (Movie) parent.getAdapter().getItem(position);
-        *//*Toast.makeText(MainFragment.this, "" + movie.getTitle(),
-                Toast.LENGTH_SHORT).show();*//*
-        Helper.getMovies(getActivity(), movie);
-//              To open the new activity (detailed activity)
-//              when a image in the gridview is clicked using Intents
-
-        Intent intent = new Intent(getActivity() , MovieDetailActivity.class);
-        intent.putExtra("Movie", movie);
-        startActivity(intent);*/
-
-           /* Bundle bundle = new Bundle();
-            bundle.putParcelable("Movie",movie);
-            MovieDetailFragment fragment = new MovieDetailFragment();
-           fragment.setArguments(bundle);*/
-
+        // Movie movie = (Movie) parent.getAdapter().getItem(position);
+        ((MovieCallback)getActivity()).onGridItemSelected(position);
     }
 
 
@@ -193,8 +144,6 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
 
         @Override
         protected Void doInBackground(String... params) {
-
-
 //          string variables to hold the api request urls for popular movies and top rated movies
 
             String url_popularity = "https://api.themoviedb.org/3/movie/popular?api_key=";
@@ -203,14 +152,10 @@ public class MainFragment extends Fragment implements AdapterView.OnItemClickLis
             // TODO: 01-12-2016 add the code to insert the values into the MovieDetail table.
             getJson(url_popularity,mPopularList);
             getJson(url_topvote,mTopVotedList);
-
-
             return null;
-
         }
 
-
-            @Override
+        @Override
         protected void onPostExecute(Void v) {
                 progressDialog.dismiss();
 //              Calling function to load from the sharedpreferences
