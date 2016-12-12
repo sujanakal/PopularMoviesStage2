@@ -23,14 +23,12 @@ import java.util.ArrayList;
 
 public class ReviewFragment extends Fragment {
 
-    String TAG = ReviewFragment.class.getSimpleName();
     ArrayList<Reviews> movieReviews = new ArrayList<>();
     LinearLayout parent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        //View rootView = inflater.inflate(R.layout.review_fragment,container,false);
         View rootView = inflater.inflate(R.layout.review_dynamiclayout,container,false);
         parent = (LinearLayout) rootView.findViewById(R.id.reviewCustomLayout);
         movieReviews = getArguments().getParcelableArrayList("ReviewArrayList");
@@ -44,38 +42,4 @@ public class ReviewFragment extends Fragment {
 
         return rootView;
     }
-    /*@Override
-    public void onStart()
-    {
-        super.onStart();
-        movieReviews = getArguments().getParcelableArrayList("ReviewArrayList");
-        Helper.loadMovieReviews(getActivity(), movieReviews, parent);
-    }*/
-
-    /* public void movieReviews(Reviews reviews)
-    {
-        LinearLayout revFragmentLayout = (LinearLayout) getView().findViewById(R.id.Review_fragment_linear_layout);
-        TextView authorName = new TextView(getContext());
-        TextView content = new TextView(getContext());
-        authorName.setText(reviews.getAuthor());
-        content.setText(reviews.getContent());
-
-        revFragmentLayout.addView(authorName);
-        revFragmentLayout.addView(content);
-        revFragmentLayout.setDividerPadding(10);
-    }*/
-
-   /* public void loadReviewAdapter(ArrayList<Reviews> mRev)
-    {
-        ListView reviewList = (ListView) getView().findViewById(R.id.review_list);
-
-        ReviewAdapter reviewAdapter = new ReviewAdapter(getActivity(),mRev);
-        reviewList.setAdapter(reviewAdapter);
-
-        *//*for(int i=0; i<mRev.size();i++){
-            Reviews reviews = mRev.get(i);
-            movieReviews(reviews);
-        }*//*
-    }*/
-
 }

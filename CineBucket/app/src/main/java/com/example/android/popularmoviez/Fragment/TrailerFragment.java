@@ -31,8 +31,6 @@ public class TrailerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstantState){
-       //return layoutInflater.inflate(R.layout.trailer_fragment,container,false);
-       // return layoutInflater.inflate(R.layout.trailers_recyclerview,container,false);
         View rootView = layoutInflater.inflate(R.layout.trailers_dynamiclayout,container,false);
         parent = (LinearLayout) rootView.findViewById(R.id.trailerCustomParent);
         movieTrailers = getArguments().getParcelableArrayList("TrailerArrayList");
@@ -44,28 +42,6 @@ public class TrailerFragment extends Fragment {
             loadMovieTrailers(movieTrailers);
         return rootView;
     }
-    /*@Override
-    public void onStart(){
-        super.onStart();
-        movieTrailers = getArguments().getParcelableArrayList("TrailerArrayList");
-        loadMovieTrailers(movieTrailers);
-    }
-*/
-
-    /*public void loadTrailersAdapter(ArrayList<Trailers> movieTrailers){
-        *//*ListView trailerListView = (ListView) getView().findViewById(R.id.trailersListView);
-        TrailerAdapter trailerAdapter = new TrailerAdapter(getContext(),movieTrailers);
-        trailerListView.setNestedScrollingEnabled(false);
-        trailerListView.setAdapter(trailerAdapter);*//*
-
-
-        *//*RecyclerView trailerRecyclerView = (RecyclerView) getView().findViewById(R.id.trailersRecyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        trailerRecyclerView.setLayoutManager(layoutManager);
-        RecyclerView.Adapter adapter = new TrailerRecyclerAdapter(getContext(),movieTrailers);
-        trailerRecyclerView.setAdapter(adapter);*//*
-    }*/
-
     
     public void loadMovieTrailers(ArrayList<Trailers> movieTrailers){
         Trailers mTrailers;

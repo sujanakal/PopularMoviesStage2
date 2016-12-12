@@ -5,7 +5,11 @@
     tools:context=".Fragment.MainFragment"
     android:background="@color/background">
 
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/app_bar"></include>
     <GridView
+        android:layout_below="@id/toolBar"
         style="@style/Grid"
         android:id="@+id/movie_grid"
         />

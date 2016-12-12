@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/mainContainer">
+    android:id="@+id/mainContainer">-->
 
-    <include
+    <!--<include
         android:id="@+id/toolBar"
-        layout="@layout/app_bar"></include>
+        layout="@layout/app_bar"></include>-->
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mainFragment"/>
+<!--<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android" />-->
 
-</LinearLayout>
+<fragment android:name="com.example.android.popularmoviez.Fragment.MainFragment"
+    android:id="@+id/mainFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Activity.MainActivity"
+    tools:layout="@layout/main_fragment_xml"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" />
+
+<!--
+</LinearLayout>-->

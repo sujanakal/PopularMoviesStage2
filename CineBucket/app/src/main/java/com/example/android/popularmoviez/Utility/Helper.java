@@ -105,8 +105,6 @@ public class Helper {
                     iReviews.setUrl(iObject.getString(URL));
 
                     reviewList.add(iReviews);
-
-                    //insertIntoReviewsTable(iObject);
                 }
             }
         } catch (ProtocolException e) {
@@ -146,27 +144,12 @@ public class Helper {
         }
     }
 
-// TODO: 01-12-2016 Correct this!
-    /*public static void insertIntoReviewsTable(JSONObject object){
-        MovieReviews reviewEntry = new MovieReviews();
-        try {
-            reviewEntry.author = object.getString(AUTHOR);
-            reviewEntry.url = object.getString(URL;
-            reviewEntry.Content = o
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
-
     public static boolean isOnline(Context context){
         String alertTitle = "Network Error!";
         String alertMessage = "Could not load the movies.\nPlease check your network settings and try again!";
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if(networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
-            //Toast.makeText(getApplicationContext(),noInternerConnection, Toast.LENGTH_LONG).show();
             AlertDialog noInternetAlert = new AlertDialog.Builder(context).create();
             noInternetAlert.setTitle(alertTitle);
             noInternetAlert.setMessage(alertMessage);
@@ -327,31 +310,31 @@ public class Helper {
         updateArg[0] = String.valueOf(movieId);
         ContentValues values = new ContentValues();
         values.put("favorite", flag);
-// update the Table's favorite column.
         context.getContentResolver().update(MoviesTable.CONTENT_URI,values,"movie_id=?",updateArg);
     }
 
 
     public static void getMovies(Context context, Movie movie){
         String[] queryArg = new String[1];
-        queryArg[0] = String.valueOf(movie.getId());
+        if(movie != null) {
+            queryArg[0] = String.valueOf(movie.getId());
+            Cursor movieRow = context.getContentResolver().query(MoviesTable.CONTENT_URI,null,"movie_id=?",queryArg,null);
+            MovieDetails movieResult = MoviesTable.getRow(movieRow,false);
 
-        Cursor movieRow = context.getContentResolver().query(MoviesTable.CONTENT_URI,null,"movie_id=?",queryArg,null);
-        MovieDetails movieResult = MoviesTable.getRow(movieRow,false);
-
-        movie.setBackdrop_path(movieResult.backdropPath);
-        movie.setId(movieResult.movie_id);
-        movie.setOriginal_title(movieResult.originalTitle);
-        movie.setOverview(movieResult.overview);
-        movie.setRelease_date(movieResult.releaseDate);
-        movie.setPoster_path(movieResult.posterPath);
-        movie.setPopularity(movieResult.popularity);
-        movie.setTitle(movieResult.Title);
-        movie.setVote_average(movieResult.voteAverage);
-        movie.setVote_count(movieResult.voteCount);
-        movie.setAdult(movieResult.adult);
-        movie.setOriginalLanguage(movieResult.originalLanguage);
-        movie.setFavorite(movieResult.favorite);
+            movie.setBackdrop_path(movieResult.backdropPath);
+            movie.setId(movieResult.movie_id);
+            movie.setOriginal_title(movieResult.originalTitle);
+            movie.setOverview(movieResult.overview);
+            movie.setRelease_date(movieResult.releaseDate);
+            movie.setPoster_path(movieResult.posterPath);
+            movie.setPopularity(movieResult.popularity);
+            movie.setTitle(movieResult.Title);
+            movie.setVote_average(movieResult.voteAverage);
+            movie.setVote_count(movieResult.voteCount);
+            movie.setAdult(movieResult.adult);
+            movie.setOriginalLanguage(movieResult.originalLanguage);
+            movie.setFavorite(movieResult.favorite);
+        }
     }
 
     public static void makeToast(Context context,String msg){
